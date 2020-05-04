@@ -3,6 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   enum role: [:admin, :buyer, :seller]
   has_many :products , dependent: :destroy
+  has_many :carts , dependent: :destroy
+  has_many :orders , dependent: :destroy
+  has_many :checkouts , dependent: :destroy
+  has_one :store , dependent: :destroy
+
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
