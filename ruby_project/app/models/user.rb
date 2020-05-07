@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_many :orders , dependent: :destroy
   has_many :checkouts , dependent: :destroy
   has_one :store , dependent: :destroy
-
+  has_one_attached :avatar
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
