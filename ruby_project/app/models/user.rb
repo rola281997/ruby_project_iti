@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  enum role: [:admin, :buyer, :seller]
+  enum role: [:buyer, :seller]
   has_many :products , dependent: :destroy
   has_many :carts , dependent: :destroy
   has_many :orders , dependent: :destroy
@@ -12,3 +12,5 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
+
+# :admin,
