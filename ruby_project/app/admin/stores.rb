@@ -5,7 +5,7 @@ ActiveAdmin.register Store do
   #
   # Uncomment all parameters which should be permitted for assignment
   #
-  # permit_params :name, :summary, :seller_id
+  permit_params :name, :summary, :user_id
   #
   # or
   #
@@ -14,5 +14,14 @@ ActiveAdmin.register Store do
   #   permitted << :other if params[:action] == 'create' && current_user.admin?
   #   permitted
   # end
+  form do |f|
+    f.inputs "Store Details" do
+      f.input :name
+      f.input :summary
+      #THIS LINE NEEDS TO BE CHANGED
+      f.input :user_id, :as => :select, :collection => User.where(role: '1').all.map{|u| [u.username, u.id]}
+    end
+    f.actions
+  end
   
 end
