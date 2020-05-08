@@ -26,6 +26,25 @@ class ProductsController < ApplicationController
         end
     end
 
+    def update
+        @product = Product.find(params[:id])
+        if @product.update(product_params)
+          redirect_to @product
+        else
+          render 'edit'
+        end
+    end
+
+    def destroy
+        @product = Product.find(params[:id])
+         if @product.destroy
+            redirect_to @product
+        
+        else      
+            render :destroy   
+        end 
+    end
+
     def product_params
         params.require(:product).permit(:title, :description, :price, :image, 
                             :inStock_amount, :category_id, :brand_id)
