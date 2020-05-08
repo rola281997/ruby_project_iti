@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+    before_action :authenticate_user!
+
     def index
         @products = Product.all
     end
@@ -19,17 +21,18 @@ class ProductsController < ApplicationController
         @product = Product.new(product_params)
         @product.user_id = current_user.id
         if @product.save
-        redirect_to @product
+            redirect_to @product
         else
-        load_data    
-        render 'new'
+            load_data    
+            render 'new'
         end
     end
 
     def update
         @product = Product.find(params[:id])
         if @product.update(product_params)
-          redirect_to @product
+            authorize! :update , @product
+            redirect_to @product
         else
           render 'edit'
         end
@@ -38,8 +41,8 @@ class ProductsController < ApplicationController
     def destroy
         @product = Product.find(params[:id])
          if @product.destroy
+            authorize! :destroy , @product
             redirect_to @product
-        
         else      
             render :destroy   
         end 

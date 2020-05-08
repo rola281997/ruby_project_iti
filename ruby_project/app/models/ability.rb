@@ -2,12 +2,11 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    can :read, product
+    can :read, Product
     
     if user.present? 
-      can [:update , :create], Product , role: 'seller' do |product|
-         product.user : user.id
-      end
+      can [:destroy, :update , :create], Product , user: { role: 'seller' } , :user => user
+      
     end
     
     #   user ||= User.new # guest user (not logged in)
