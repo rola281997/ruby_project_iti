@@ -26,6 +26,20 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
     t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
   end
 
+  create_table "active_admin_comments", force: :cascade do |t|
+    t.string "namespace"
+    t.text "body"
+    t.string "resource_type"
+    t.integer "resource_id"
+    t.string "author_type"
+    t.integer "author_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
+    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
+    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,10 +80,10 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
   end
 
   create_table "carts", force: :cascade do |t|
-    t.integer "buyer_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["buyer_id"], name: "index_carts_on_buyer_id"
+    t.index ["user_id"], name: "index_carts_on_user_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -83,21 +97,21 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
     t.integer "cart_id", null: false
     t.integer "product_id", null: false
     t.integer "order_id", null: false
-    t.integer "seller_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_checkouts_on_cart_id"
     t.index ["order_id"], name: "index_checkouts_on_order_id"
     t.index ["product_id"], name: "index_checkouts_on_product_id"
-    t.index ["seller_id"], name: "index_checkouts_on_seller_id"
+    t.index ["user_id"], name: "index_checkouts_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "buyer_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "state"
-    t.index ["buyer_id"], name: "index_orders_on_buyer_id"
+    t.index ["user_id"], name: "index_orders_on_user_id"
   end
 
   create_table "products", force: :cascade do |t|
@@ -105,31 +119,29 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
     t.text "description"
     t.float "price"
     t.integer "inStock_amount"
-    t.string "image"
     t.integer "brand_id", null: false
     t.integer "category_id", null: false
-    t.integer "seller_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["brand_id"], name: "index_products_on_brand_id"
     t.index ["category_id"], name: "index_products_on_category_id"
-    t.index ["seller_id"], name: "index_products_on_seller_id"
+    t.index ["user_id"], name: "index_products_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
     t.string "name"
     t.string "summary"
-    t.integer "seller_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["seller_id"], name: "index_stores_on_seller_id"
+    t.index ["user_id"], name: "index_stores_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "username"
-    t.string "avatar"
     t.string "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -141,14 +153,14 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "carts", "users", column: "buyer_id"
+  add_foreign_key "carts", "users"
   add_foreign_key "checkouts", "carts"
   add_foreign_key "checkouts", "orders"
   add_foreign_key "checkouts", "products"
-  add_foreign_key "checkouts", "users", column: "seller_id"
-  add_foreign_key "orders", "users", column: "buyer_id"
+  add_foreign_key "checkouts", "users"
+  add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"
-  add_foreign_key "products", "users", column: "seller_id"
-  add_foreign_key "stores", "users", column: "seller_id"
+  add_foreign_key "products", "users"
+  add_foreign_key "stores", "users"
 end

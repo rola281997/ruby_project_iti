@@ -5,7 +5,7 @@ class CreateCheckouts < ActiveRecord::Migration[6.0]
         t.references :cart, null: false, foreign_key: { to_table: :carts }
         t.references :product, null: false, foreign_key: { to_table: :products }
         t.references :order, null: false, foreign_key: { to_table: :orders }
-        t.references :seller, null: false, foreign_key: { to_table: :users }
+        t.references :user, null: false, foreign_key: { to_table: :users }
       t.timestamps
     end
   end
