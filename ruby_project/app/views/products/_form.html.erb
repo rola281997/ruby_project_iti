@@ -13,37 +13,37 @@
   
     <div class="field">
       <%= form.label :title %>
-      <%= form.text_field :title %>
+      <%= form.text_field :title , :class=>'form-control'%>
     </div>
   
     <div class="field">
       <%= form.label :description %>
-      <%= form.text_area :description %>
+      <%= form.text_area :description ,:class=>'form-control' %>
     </div>
   
     <div class="field">
       <%= form.label :price %>
-      <%= form.text_field :price %>
+      <%= form.text_field :price ,:class=>'form-control' %>
     </div>
   
     <div class="field">
       <%= form.label :inStock_amount %>
-      <%= form.number_field :inStock_amount %>
-    </div>
+      <%= form.number_field :inStock_amount , :class=>'form-control' %>
+    </div> <br/>
   
-    <div class="field">
+    <div class="field form-group">
       <%= form.label :category_id %>
       <%= form.select :category_id, options_for_select(Category.all.map{|s|[s.name,s.id]}) %>
     </div>
   
-    <div class="field">
+    <div class="field form-group">
       <%= form.label :brand_id %>
       <%= form.select :brand_id, options_for_select(Brand.all.map{|s|[s.name,s.id]}) %>
     </div>
   
-    <div class="field">
-      <%= form.label :image %>
-      <%= form.file_field :image %>
+   <div class="field form-group">
+      <%= form.label :image %><br/>
+      <%= form.file_field :image  , :class=>'form-control-file' %>
     </div>
     
     <div class="actions">
