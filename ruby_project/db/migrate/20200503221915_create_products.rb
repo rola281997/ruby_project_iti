@@ -5,10 +5,10 @@ class CreateProducts < ActiveRecord::Migration[6.0]
       t.text :description
       t.float :price
       t.integer :inStock_amount
-      t.string  :image
+      # t.string  :image
       t.references :brand, null: false, foreign_key: { to_table: :brands }
       t.references :category, null: false, foreign_key: { to_table: :categories }
-      t.references :seller, null: false, foreign_key: { to_table: :users }
+      t.references :user, null: false, foreign_key: { to_table: :users }
 
       t.timestamps
     end

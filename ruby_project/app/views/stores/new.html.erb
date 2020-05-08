@@ -21,8 +21,9 @@
     <p>
       <%= form.label :summary %><br>
       <%= form.text_area :summary %>
+      
     </p>
-    <%= select_tag 'seller_id', options_for_select(@sellers.collect{ |u| [u.name, u.id] }) %>
+    <%= form.select 'user_id', options_for_select(@sellers.collect{ |u| [u.username, u.id] }) %>
     <p>
       <%= form.submit %>
     </p>

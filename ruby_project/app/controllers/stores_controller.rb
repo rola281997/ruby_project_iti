@@ -15,9 +15,9 @@ class StoresController < ApplicationController
 
     private
     def store_params
-        params.require(:store).permit(:name, :summary, :seller_id)
+        params.require(:store).permit(:name, :summary, :user_id)
     end
     def load_data
-        @sellers = User.find_by(role: 0)
+        @sellers = User.where(role: 'seller')
     end
 end
