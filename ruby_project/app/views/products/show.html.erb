@@ -35,5 +35,6 @@
   <%=image_tag(@product.image, style: "width:250px; height:150px; margin:5px", class: "rounded") if @product.image.attached? %>
 </p>
 
+<%= button_to 'Add to Cart', (product_id: @product), class:'button is warning add-to-cart'%>
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
