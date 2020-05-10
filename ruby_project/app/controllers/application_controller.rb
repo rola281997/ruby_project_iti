@@ -1,6 +1,13 @@
 class ApplicationController < ActionController::Base
   
     before_action :configure_permitted_parameters, if: :devise_controller?
+  #   before_action :initialize
+  
+  # def initialize
+  #   session[:order_id] = 0
+  #   session[:cart_id] = 0
+  # end
+      
     
     
   protected

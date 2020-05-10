@@ -35,9 +35,9 @@
   <%=image_tag(@product.image, style: "width:250px; height:150px; margin:5px", class: "rounded") if @product.image.attached? %>
 </p>
 
-<%= form_with(url: carts_path, method: "post") do |form| %>
-  <%= form.hidden_field(:id, :value => @product.id) %>
-  <%= form.submit "Add to cart" %>
+<%= form_tag("/carts/addtocart", method: "get") do %>
+  <%= hidden_field_tag(:id, @product.id) %>
+  <%= submit_tag "Add to cart" %>
 <% end %>
 
 
