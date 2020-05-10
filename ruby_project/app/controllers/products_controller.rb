@@ -2,7 +2,13 @@ class ProductsController < ApplicationController
     before_action :authenticate_user!
 
     def index
-        @products = Product.all
+          @products = Product.all
+        @search = params["search"]
+        if @search.present?
+          @title = @search["title"]
+          #@description=@search["description"]
+          @products = Product.where("title LIKE ? OR description LIKE ? ", "%#{@title}%","%#{@title}%")
+        end
     end
      
     def new

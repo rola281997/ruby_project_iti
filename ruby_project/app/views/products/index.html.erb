@@ -1,7 +1,10 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Products</h1>
-
+<%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
+  <%= f.input :title , input_html: {value: ""} %>   
+  <%= f.submit "Search", class: "btn btn-primary" %>
+<% end %>
 <table>
   <thead>
     <tr>
