@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  enum state: [:pending, :confirmed, :delivered]
+  enum state: [:created, :pending, :confirmed, :delivered]
 	belongs_to :user
     has_many :checkouts , dependent: :destroy
 

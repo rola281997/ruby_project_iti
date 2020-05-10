@@ -5,7 +5,8 @@ class User < ApplicationRecord
   has_many :products , dependent: :destroy
   has_many :carts , dependent: :destroy
   has_many :orders , dependent: :destroy
-  has_many :checkouts , dependent: :destroy
+	has_many :checkouts , dependent: :destroy
+  
   has_one :store , dependent: :destroy
   has_one_attached :avatar
 
