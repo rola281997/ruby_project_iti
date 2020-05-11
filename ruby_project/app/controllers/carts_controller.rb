@@ -9,7 +9,7 @@ class CartsController < ApplicationController
         @cart.cart_id = session[:cart_id]
         @cart.order_id = session[:order_id]
         @cart.product_id = @product.id
-        @cart.quantity = 1
+        @cart.quantity = @cart.quantity + 1
         @cart.user_id = @product.user_id
         @cart.save
         render 'add_to_cart'
