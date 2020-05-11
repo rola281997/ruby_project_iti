@@ -6,11 +6,11 @@ class CartsController < ApplicationController
         
     end
 
-    def upload_quantity
-      @product = Product.find(params[:id])
-      @instock = @product.inStock_amount
-      redirect_to request.referrer
-    end
+    # def upload_quantity
+    #   @product = Product.find(params[:id])
+    #   @instock = @product.inStock_amount
+    #   redirect_to request.referrer
+    # end
 
     def add_to_cart
         @product = Product.find(params[:id])

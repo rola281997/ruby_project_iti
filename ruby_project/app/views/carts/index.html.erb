@@ -1,3 +1,4 @@
+<div class="col-md-9 offset-2 my-5">
  
 <h1>Cart</h1>
 
@@ -14,14 +15,30 @@
         <strong>price:</strong>
         <%= cart.product.price %>
         </p>
-        <p>
-        <strong>quantity:</strong>
-        <%=cart.quantity %>
-        </p>
-        <%= link_to "Remove item", checkout_path(cart.product.id), method: "delete" %> 
+
+        <%=form_with(model:cart, local:true) do |form|%>
+            <%=form.label :quantity%>
+            <%=form.number_field :quantity, {:name => 'quantity', :type => "integer"}%>
+            <%=form.submit "Update"%>
+            <%end%>
+          
+        
+       <br>
+       <p>
+       <strong>Subtotal:</strong> 
+       </p>
+
+       <p>
+       <%= link_to "Remove item", checkout_path(cart.product.id), method: "delete" %>
+            </p>
+
+       <br>
+
         <% end %>
-        <%= link_to 'Back', products_path %>
-       
+        <br>
+        <h3>Total:<h3>   
+        <%= link_to 'Back', products_path %>     
+    </div>
   
 
 

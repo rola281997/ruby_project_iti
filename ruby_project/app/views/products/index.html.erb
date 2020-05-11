@@ -1,11 +1,74 @@
 <p id="notice"><%= notice %></p>
-<%= link_to 'See Cart', carts_path, class:'btn btn-primary text-white' %>
 
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+     <%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' }  do |f| %>
+          <%= f.input :title , input_html: {value: ""}  %>   
+          
+
+      <div class="sidebar-sticky">
+
+        <ul class="nav flex-column">
+          <%# <%= form_with(url: root_path , method: "get") do |f|%> 
+          <li class="nav-item">
+             <div class="widget catagory mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-3 mt-1">Catagories</h6>
+
+                <!--  Catagories  -->
+                <div class="catagories-menu">
+                    <ul>
+                        <% Category.all.each do |cat| %>
+                          <input type="checkbox" id="<%= cat.id %>" value="<%= cat.id %>" name='category'>
+                          <label for="<%= cat.id %>" ><%= cat.name %> </label><br/>
+                      <% end %>
+                    </ul>
+                </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <div class="widget brand mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">Brands</h6>
+
+                <!--  Brands  -->
+                <div class="brands-menu">
+                    <ul>
+                        <% Brand.all.each do |brand| %>
+                              <input type="checkbox" id="<%= brand.id %>" value="<%= brand.id %>" name='brand'>
+                              <label for="<%= brand.id %>" ><%= brand.name %> </label><br/>
+                      <% end %>
+                    </ul>
+                </div>
+            </div>
+          </li>
+
+          <li class="nav-item">
+            <div class="widget seller mb-50">
+                <!-- Widget Title -->
+                <h6 class="widget-title mb-30">Sellers</h6>
+
+                <!--  Sellers  -->
+                <div class="seller-menu">
+                    <ul>
+                        <% User.where(role: 'seller').each do |seller| %>
+                              <input type="checkbox" id="<%= seller.id %>" value="<%= seller.id %>" name='seller'>
+                              <label for="<%= seller.id %>" ><%= seller.username %> </label><br/>
+                        <% end %>
+                    </ul>
+                </div>
+            </div>
+          </li>
+        </ul>
+        <%= f.submit "Search", class: "btn btn-primary my-1" %>
+        </div>
+        <% end %>
+        </nav>
+
+<div class="col-md-8 offset-1 my-5">
+     
 <h1>Products</h1>
-<%= simple_form_for :search, url: root_path, method: "GET", html: { class: 'form-inline' } do |f| %>
-  <%= f.input :title , input_html: {value: ""} %>   
-  <%= f.submit "Search", class: "btn btn-primary" %>
-<% end %>
+
+<br/>
 <table>
   <thead>
     <tr>
@@ -58,3 +121,44 @@
 <% if current_user.role == "seller" %> 
     <%= link_to 'New Product', new_product_path  , class: 'btn btn-success btn.lg text-white' %>
  <% end %>  
+
+ </div>
+
+<%# <script> 
+  //  document.addEventListener("turbolinks:load", function() {
+
+     $('input[type="checkbox"]').on('click', function(){ 
+       let brand ='';
+        let seller = '';
+        let category='';
+          if($(this)[0].name=="brand")
+          {
+            brand = $(this)[0].value ;
+          }
+          if($(this)[0].name=="seller")
+          {
+            seller = $(this)[0].value ;
+          }
+          if($(this)[0].name=="category")
+          {
+            category = $(this)[0].value ;     
+          }
+          $.ajax({
+              url: "http://localhost:3000/?search%5Btitle%5D=apple&commit=Search/",
+              // url:  root_path, 
+              type: "get", 
+              contentType: 'application/json; charset=utf-8',
+              data:{ 
+                brand: brand , 
+                category: category , 
+                seller: seller 
+              },
+              success: function(response) {
+                console.log("you got me");
+              },
+              error: function(xhr) {
+                //Do Something to handle error
+              }
+          });
+     });
+</script> %>
