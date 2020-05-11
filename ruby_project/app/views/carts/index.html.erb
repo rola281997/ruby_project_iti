@@ -1,0 +1,25 @@
+ 
+<h1>Cart</h1>
+
+    <% @carts.each do |cart| %>
+        <p>
+        <strong>product:</strong>
+        <%= cart.product.title %>
+        </p>
+        <p>
+        <strong>description:</strong>
+        <%= cart.product.description %>
+        </p>
+        <p>
+        <strong>price:</strong>
+        <%= cart.product.price %>
+        </p>
+        <p>
+        <strong>quantity:</strong>
+        <%= cart.quantity %>
+        </p>
+        <% end %>
+       
+  
+
+
