@@ -14,19 +14,28 @@
         <strong>price:</strong>
         <%= cart.product.price %>
         </p>
-        <p>
-        <strong>quantity:</strong>
-        <%=cart.quantity %>
-        </p>
-       
+        
 
-        <%= link_to "Remove item", checkout_path(cart.product.id), method: "delete" %>
+        <%=form_with(model:cart, local:true) do |form|%>
+            <%=form.label :quantity%>
+            <%=form.number_field :quantity%>
+            <%=form.submit "Update"%>
+            <%end%>
+        
+       <br>
+       <p>
+       <strong>Subtotal:</strong> 
+       </p>
 
+       <p>
+       <%= link_to "Remove item", checkout_path(cart.product.id), method: "delete" %>
+            </p>
 
-       
+       <br>
 
         <% end %>
-       
+        <br>
   
+        <h3>Total:<h3>   
 
 
