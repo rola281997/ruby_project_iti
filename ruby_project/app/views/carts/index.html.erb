@@ -1,25 +1,25 @@
  
 <h1>Cart</h1>
 
-
-
-<% @cart.each do |item| %>
-
-    <h3><%= @product.title %></h3>
-    <h5><%= @product.price %></h5>
-
-
-    <%= form_for item, remote: true do |f| %>
-
-        <%= f.number_field :#, :value => # %>
-        <%= f.submit "Update Card "%>
-
-        <%= "Remove Items", %>
-
-    <% end %>
-    <h2>total: <%=  %></h2>
-
-<% end %>
-
+    <% @carts.each do |cart| %>
+        <p>
+        <strong>product:</strong>
+        <%= cart.product.title %>
+        </p>
+        <p>
+        <strong>description:</strong>
+        <%= cart.product.description %>
+        </p>
+        <p>
+        <strong>price:</strong>
+        <%= cart.product.price %>
+        </p>
+        <p>
+        <strong>quantity:</strong>
+        <%= cart.quantity %>
+        </p>
+        <% end %>
+       
+  
 
 

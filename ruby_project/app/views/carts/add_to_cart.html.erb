@@ -2,31 +2,5 @@
 <p>
 <%= @cart.inspect %>
 
+
 </p>
-
-<h1>Cart</h1>
-
-
-    <% if cart.products%>
-    <% cart.products.each do |product| %>
-        <p>
-        <strong>product:</strong>
-        <%= cart.product.title %>
-        </p>
-        <p>
-        <strong>description:</strong>
-        <%= cart.product.description %>
-        </p>
-        <p>
-        <strong>price:</strong>
-        <%= cart.product.price %>
-        </p>
-        <p>
-        <strong>quantity:</strong>
-        <%= cart.product.quantity %>
-        </p>
-        <p>
-        <%= f.submit "Update Cart "%>
-        <%= f.submit "Remove Items" %>
-    <% end %>  
-    <%end%>
