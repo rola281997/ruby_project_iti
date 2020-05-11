@@ -83,13 +83,13 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
     t.integer "cart_id", null: false
     t.integer "product_id", null: false
     t.integer "order_id", null: false
-    t.integer "store_id", null: false
+    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cart_id"], name: "index_checkouts_on_cart_id"
     t.index ["order_id"], name: "index_checkouts_on_order_id"
     t.index ["product_id"], name: "index_checkouts_on_product_id"
-    t.index ["store_id"], name: "index_checkouts_on_store_id"
+    t.index ["user_id"], name: "index_checkouts_on_user_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -143,7 +143,7 @@ ActiveRecord::Schema.define(version: 2020_05_07_080224) do
   add_foreign_key "checkouts", "carts"
   add_foreign_key "checkouts", "orders"
   add_foreign_key "checkouts", "products"
-  add_foreign_key "checkouts", "stores"
+  add_foreign_key "checkouts", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "products", "brands"
   add_foreign_key "products", "categories"

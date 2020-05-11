@@ -2,18 +2,26 @@ class CartsController < ApplicationController
     before_action :authenticated?, :current_cart, :current_order
 
     def index
-        @carts = Cart.all
-        @current_cart = session[:cart_id]
+        @carts=Checkout.where("cart_id = ?", session[:cart_id])
         
     end
 
     def add_to_cart
         @product = Product.find(params[:id])
+        @cart = Checkout.where("cart_id = ? AND product_id = ?", session[:cart_id], @product.id).first
+        if @cart
+           @cart.quantity = @cart.quantity + 1
+           @cart.save
+        else
         @cart = Checkout.new
         @cart.cart_id = session[:cart_id]
         @cart.order_id = session[:order_id]
         @cart.product_id = @product.id
+        @cart.quantity =  1
+        @cart.user_id = @product.user_id
         @cart.save
+        end
+        redirect_to request.referrer
     end
 
   def current_cart
@@ -35,12 +43,14 @@ class CartsController < ApplicationController
       @order.user_id = current_user.id
       @order.state = 'created'
       @order.save
-      session[:cart_id] = @order.id
+      session[:order_id] = @order.id
     end
   end
 
 
   def authenticated?
+    # session[:cart_id]=nil
+    # session[:order_id]=nil
     if current_user
         session[:user_id] = current_user.id
     else 
@@ -49,4 +59,5 @@ class CartsController < ApplicationController
   end
 
 
+  
 end
