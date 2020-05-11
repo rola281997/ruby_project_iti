@@ -10,8 +10,8 @@ Rails.application.routes.draw do
   resources :categories 
   resources :brands   
   resources :products
+  resources :checkouts
   get '/carts/addtocart', to: 'carts#add_to_cart', as: 'add_to_cart'
-
   resources :carts
   
 

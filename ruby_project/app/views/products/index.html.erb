@@ -38,8 +38,16 @@
          <% if can? :destroy , product %>  
             <td><%= link_to 'Delete', product, method: :delete,  class: 'btn btn-danger text-white' ,
                 data: { confirm: 'Are you sure?' } %></td>
-         <% end %> 
+                
+         <% end %>
+
+         <td> <%= form_tag("/carts/addtocart", method: "get") do %>
+          <%= hidden_field_tag(:id, product.id) %>
+          <%= submit_tag "Add to cart" %>
+        <% end %></td> 
       </tr>
+     
+
     <% end %>
   </tbody>
   

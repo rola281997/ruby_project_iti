@@ -21,7 +21,7 @@ class CartsController < ApplicationController
         @cart.user_id = @product.user_id
         @cart.save
         end
-        redirect_to @product
+        redirect_to request.referrer
     end
 
   def current_cart
@@ -57,6 +57,7 @@ class CartsController < ApplicationController
       redirect_to '/users/sign_in'
     end
   end
+
 
   
 end

@@ -16,8 +16,15 @@
         </p>
         <p>
         <strong>quantity:</strong>
-        <%= cart.quantity %>
+        <%=cart.quantity %>
         </p>
+       
+
+        <%= link_to "Remove item", checkout_path(cart.product.id), method: "delete" %>
+
+
+       
+
         <% end %>
        
   
