@@ -6,11 +6,10 @@ class CartsController < ApplicationController
         
     end
 
-    def check_instock
+    def upload_quantity
       @product = Product.find(params[:id])
       @instock = @product.inStock_amount
-      
-      # render 'add_to_cart'
+      redirect_to request.referrer
     end
 
     def add_to_cart
@@ -38,8 +37,8 @@ class CartsController < ApplicationController
         @cart.save
         end
         redirect_to request.referrer
-        # redirect_to @product
-      end
+    end
+
 
   def current_cart
     if session[:cart_id]
@@ -74,6 +73,7 @@ class CartsController < ApplicationController
       redirect_to '/users/sign_in'
     end
   end
+
 
   
 end
