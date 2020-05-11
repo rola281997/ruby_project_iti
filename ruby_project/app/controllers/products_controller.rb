@@ -4,12 +4,21 @@ class ProductsController < ApplicationController
     def index
           @products = Product.all
         @search = params["search"]
-        if @search.present?
+        if (@search.present? || @brand.present? || params[:category].present? || params[:seller].present? )
           @title = @search["title"]
           #@description=@search["description"]
-          @products = Product.where("title LIKE ? OR description LIKE ? ", "%#{@title}%","%#{@title}%")
+          @products = Product.where("title LIKE ? OR description LIKE ? ", "%#{@title}%","%#{@title}%") 
+          if @products.empty?
+            @products = Product.all
+          end
+          
+          @products= @products.filter_by_brand(params[:category]) if params[:category].present?
+          @products = @products.filter_by_brand(params["brand"]) if params[:brand].present?
+          @products = @products.filter_by_brand(params[:seller]) if params[:seller].present?
+         
         end
     end
+     
      
     def new
         @product = Product.new
