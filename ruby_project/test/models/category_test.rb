@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase
+  
   def test_the_truth 
     assert true
   end
