@@ -2,7 +2,10 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
+    user ||= User.new
+    if user?
     can :read, Product
+    end
     
     if user.present? 
       can [:destroy, :update , :create], Product , user: { role: 'seller' } , :user => user 
@@ -16,7 +19,7 @@ class Ability
 
     
     
-    #   user ||= User.new # guest user (not logged in)
+    #    # guest user (not logged in)
     #   if user.admin?
     #     can :manage, :all
     #   else

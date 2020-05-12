@@ -119,7 +119,7 @@
 </table>
 
 <br>
-<% if current_user.role == "seller" %> 
+<% if user_signed_in? && current_user.role == "seller"  %>
     <%= link_to 'New Product', new_product_path  , class: 'btn btn-success btn.lg text-white' %>
  <% end %>  
 
