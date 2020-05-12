@@ -104,7 +104,7 @@
                 data: { confirm: 'Are you sure?' } %></td>
                 
          <% end %>
-         <% if current_user.role == "buyer" %> 
+         <% if user_signed_in? && current_user.role == "buyer" %> 
             <td> <%= form_tag("/carts/addtocart", method: "get") do %>
               <%= hidden_field_tag(:id, product.id) %>
               <%= submit_tag "Add to cart" %>

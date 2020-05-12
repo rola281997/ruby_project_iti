@@ -36,7 +36,7 @@
   <%=image_tag(@product.image, style: "width:250px; height:150px; margin:5px", class: "rounded") if @product.image.attached? %>
 </p>
 
-  <% if current_user.role == "buyer" %> 
+  <% if user_signed_in? && current_user.role == "buyer" %> 
 <%= form_tag("/carts/addtocart", method: "get") do %>
   <%= hidden_field_tag(:id, @product.id) %>
   <%= submit_tag "Add to cart" %>
