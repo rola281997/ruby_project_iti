@@ -16,7 +16,8 @@
         <strong>price:</strong>
         <%= cart.product.price %>
         </p>
-
+        
+         
         <%=form_with(model:cart, local:true) do |form|%>
             <%=form.label :quantity%>
             <%=form.number_field :quantity, {:name => 'quantity', :type => "integer"}%>

@@ -13,6 +13,7 @@ class User < ApplicationRecord
   validates :avatar, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
 end
 
 # :admin,

@@ -36,12 +36,15 @@
   <%=image_tag(@product.image, style: "width:250px; height:150px; margin:5px", class: "rounded") if @product.image.attached? %>
 </p>
 
+  <% if current_user.role == "buyer" %> 
 <%= form_tag("/carts/addtocart", method: "get") do %>
   <%= hidden_field_tag(:id, @product.id) %>
   <%= submit_tag "Add to cart" %>
 <% end %>
+<% end %>
 
-
+ <% if can? :update , @product  %>
 <%= link_to 'Edit', edit_product_path(@product) %> |
+<% end %>
 <%= link_to 'Back', products_path %>
 </div>

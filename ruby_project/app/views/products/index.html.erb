@@ -104,11 +104,12 @@
                 data: { confirm: 'Are you sure?' } %></td>
                 
          <% end %>
-
-         <td> <%= form_tag("/carts/addtocart", method: "get") do %>
-          <%= hidden_field_tag(:id, product.id) %>
-          <%= submit_tag "Add to cart" %>
-        <% end %></td> 
+         <% if current_user.role == "buyer" %> 
+            <td> <%= form_tag("/carts/addtocart", method: "get") do %>
+              <%= hidden_field_tag(:id, product.id) %>
+              <%= submit_tag "Add to cart" %>
+              <% end %></td> 
+          <% end %>
       </tr>
      
 

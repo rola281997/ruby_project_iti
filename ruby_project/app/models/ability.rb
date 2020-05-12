@@ -5,9 +5,16 @@ class Ability
     can :read, Product
     
     if user.present? 
-      can [:destroy, :update , :create], Product , user: { role: 'seller' } , :user => user
-      
+      can [:destroy, :update , :create], Product , user: { role: 'seller' } , :user => user 
     end
+
+    if user.present? 
+      can [:destroy, :update , :read], Checkout , user: { role: 'buyer' } , :user => user 
+      can [:add_to_cart , :current_order], Cart , user: { role: 'buyer' } , :user => user 
+
+    end
+
+    
     
     #   user ||= User.new # guest user (not logged in)
     #   if user.admin?
