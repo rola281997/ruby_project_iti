@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_one :store , dependent: :destroy
   has_one_attached :avatar
 
+  validates :avatar, presence: true
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 end
