@@ -11,19 +11,25 @@ class CheckoutsController < ApplicationController
         @checkout = Checkout.find(params[:id])
         @product = Product.where(id: @checkout.product_id).first
         @quantity = params[:quantity].to_i 
-        if @quantity > @checkout.quantity
+        if @quantity > @checkout.quantity 
             @new_quantity = (@quantity) - (@checkout.quantity)
             if @product.inStock_amount > @new_quantity
                 @product.inStock_amount = @product.inStock_amount - @new_quantity
                 @product.save
+                @checkout.quantity = @quantity
+                @checkout.save
             end
         else
-            @new_quantity = @checkout.quantity - @quantity
-            @product.inStock_amount = @product.inStock_amount + @new_quantity
-            @product.save
+            if @quantity > 1
+                @new_quantity = @checkout.quantity - @quantity
+                @product.inStock_amount = @product.inStock_amount + @new_quantity
+                @product.save
+                @checkout.quantity = @quantity
+                @checkout.save
+            
+            end
         end
-            @checkout.quantity = @quantity
-            @checkout.save
+            
             
             redirect_to request.referrer
       end
