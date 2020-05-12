@@ -20,7 +20,7 @@ class CheckoutsController < ApplicationController
                 @checkout.save
             end
         else
-            if @quantity > 1
+                if @quantity > 1
                 @new_quantity = @checkout.quantity - @quantity
                 @product.inStock_amount = @product.inStock_amount + @new_quantity
                 @product.save
@@ -41,4 +41,5 @@ class CheckoutsController < ApplicationController
         redirect_to request.referrer
     end
 
+  
 end
