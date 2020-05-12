@@ -1,0 +1,44 @@
+<div class="col-md-9 offset-2 my-5">
+ 
+<h1>Cart</h1>
+
+    <% @carts.each do |cart| %>
+        <p>
+        <strong>product:</strong>
+        <%= cart.product.title %>
+        </p>
+        <p>
+        <strong>description:</strong>
+        <%= cart.product.description %>
+        </p>
+        <p>
+        <strong>price:</strong>
+        <%= cart.product.price %>
+        </p>
+        
+
+        <%=form_with(model:cart, local:true) do |form|%>
+            <%=form.label :quantity%>
+            <%=form.number_field :quantity%>
+            <%=form.submit "Update"%>
+            <%end%>
+        
+       <br>
+       <p>
+       <strong>Subtotal:</strong> 
+       </p>
+
+       <p>
+       <%= link_to "Remove item", checkout_path(cart.product.id), method: "delete", :class=>'btn btn-ing' %>
+            </p>
+
+       <br>
+
+       
+        <br>
+  
+        <h3>Total:<h3>   
+        
+    </div>
+
+
