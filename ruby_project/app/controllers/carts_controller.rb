@@ -1,16 +1,6 @@
 class CartsController < ApplicationController
     before_action :authenticated?, :current_cart, :current_order
 
-    def index
-        @carts=Checkout.where("cart_id = ?", session[:cart_id])
-        
-    end
-
-    # def upload_quantity
-    #   @product = Product.find(params[:id])
-    #   @instock = @product.inStock_amount
-    #   redirect_to request.referrer
-    # end
 
     def add_to_cart
         @product = Product.find(params[:id])

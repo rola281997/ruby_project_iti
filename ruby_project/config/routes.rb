@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   #resources :brands   
   resources :products
   resources :checkouts
+  get '/orders/checkout', to: 'orders#update_order', as: 'update_order'
+  resources :orders
   get '/carts/addtocart', to: 'carts#add_to_cart', as: 'add_to_cart'
   resources :carts
   

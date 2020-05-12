@@ -1,4 +1,12 @@
 class CheckoutsController < ApplicationController
+    def index
+        @carts=Checkout.where("cart_id = ?", session[:cart_id])  
+        @order = session[:order_id]
+        @total = 0
+        @carts.each do |cart|
+            @total = @total + (cart.product.price * cart.quantity)
+        end      
+    end
     def update
         @checkout = Checkout.find(params[:id])
         @product = Product.where(id: @checkout.product_id).first
